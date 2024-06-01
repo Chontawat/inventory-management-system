@@ -1,0 +1,136 @@
+<div id='list' class='list'>
+  <div class="container">
+    <h1>กรอกข้อมูลสั่งซื้อ</h1>
+    <form [formGroup]="imp_product_Form" (ngSubmit)="create_import_product_Data()">
+        <label>รหัสการสั่งซื้อสินค้า:</label><br>
+          <input type="text" class="form-control" formControlName="import_id">
+        <br>
+
+        <label>รหัสสินค้า:</label><br>
+          <input type="text" class="form-control" formControlName="product_id">
+        <br>
+
+        <label>ชื่อสินค้า:</label><br>
+          <input type="text" class="form-control" formControlName="product_name">
+        <br>
+
+        <label>ประเภทสินค้า:</label><br>
+          <select>
+            <option value="" disabled selected>เลือกประเภทสินค้า</option>
+            <option *ngFor="let typeP of TypePdata" [value]="typeP.Tproduct_id" formControlName="Tproduct_id">{{ typeP.Tproduct_name }}</option>
+          </select>
+          <br><br>
+        <br>
+
+        <label>พนักงงานที่สั่งสินค้า:</label><br>
+        <select>
+          <option value="" disabled selected>พนักงงานที่สั่งสินค้า</option>
+          <option *ngFor="let item of getEmployeeid" [value]="item.employee_id" formControlName="employee_id">{{ item.employee_name }}</option>
+        </select>
+        <br><br>
+
+        <label>ชื่อตัวแทนจัดจำหน่าย:</label>
+        <br>
+        <select>
+          <option value="" disabled selected>เลือกผู้จัดจำหน่าย</option>
+          <option *ngFor="let item of getDealerid" [value]="item.dealer_id" formControlName="dealer_id">{{ item.dealer_name }}</option>
+        </select>
+        <br><br>
+
+        <label>วันที่สั่งซื้อ:</label><br>
+          <input type="date" class="form-control" formControlName="date_of_import">
+        <br>
+
+        <label>วันที่จัดส่ง:</label><br>
+          <input type="date" class="form-control" formControlName="date_of_transport">
+        <br>
+
+        <label for="num1">จำนวน:</label><br>
+          <input type="text" class="form-control" id="value1" [(ngModel)]="value1" (input)="calculate()" formControlName="amount">
+        <br>
+
+        <label for="num2">ราคา:</label><br>
+          <input type="text" class="form-control" id="value2" [(ngModel)]="value2" (input)="calculate()" formControlName="price">
+        <br>
+        
+        <label for="Sumresult">ราคาทั้งหมด:</label><br>
+          <input type="text" class="form-control" id="result" [value]="result" readonly formControlName="total">
+        <br>
+        <br>
+        <div *ngIf="!get_imp_product_id" (click)="create_import_product_Data()">
+          <button type="button" class="btn btn-primary">กดสั่งซื้อ</button>
+        </div>
+        
+        <button type="button" class="btn btn-warning">ยกเลิก</button><br>
+      </form>
+  </div>
+
+  <br><br>
+
+<h1>ข้อมูลสินค้าคงเหลือ</h1>
+  <table class="table float-left">
+    <thead>
+      <tr>
+        <th scope="col">รหัสสินค้า</th>
+        <th scope="col">ชื่อสินค้า</th>
+        <th scope="col">ประเภทสินค้า</th>
+        <th scope="col">ตัวแทนจัดจำหน่าย</th>
+        <th scope="col">ราคา</th>
+        <th scope="col">หน่วยนับ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <tr *ngFor="let rec of readproductData">
+          <th scope="row">{{rec.product_id}}</th>
+          <td>{{rec.product_name}}</td>
+          <td>{{rec.Tproduct_name}}</td>
+          <td>{{rec.dealer_name}}</td>
+          <td>{{rec.price}}</td>
+          <td>{{rec.c_unit}}</td>
+      </tr>      
+    </tbody>
+</table>
+
+
+<h1>สินค้าที่สั่งซื้อ</h1>
+<a><button (click)="generate_Import_stock_PDF()" class="btn btn-success">ดาวน์โหลดข้อมูลการสั่งซื้อทั้งหมด</button></a>
+<table class="table float-right" >
+    <thead>
+      <tr>
+        <th scope="col">รหัสการสั่งซื้อ</th>
+        <th scope="col">รหัสสินค้า</th>
+        <th scope="col">ชื่อสินค้า</th>
+        <th scope="col">ประเภทสินค้า</th>
+        <th scope="col">ชื่อพนักงาน</th>
+        <th scope="col">ชื่อตัวแทนจัดจำหน่าย</th>
+        <th scope="col">วันสั่งซื้อ</th>
+        <th scope="col">วันส่งสินค้า</th>
+        <th scope="col">จำนวน</th>
+        <th scope="col">ราคา</th>
+        <th scope="col">ราคาทั้งหมด</th>
+        <th scope="col">รายละเอียด</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <tr *ngFor="let imp_data of read_import_product_Data">
+          <th scope="row">{{imp_data.import_id}}</th>
+          <td>{{imp_data.product_id}}</td>
+          <td>{{imp_data.product_name}}</td>
+          <td>{{imp_data.Tproduct_name}}</td>
+          <td>{{imp_data.employee_name}}</td>
+          <td>{{imp_data.dealer_name}}</td>
+          <td>{{imp_data.date_of_import | date}}</td>
+          <td>{{imp_data.date_of_transport | date}}</td>
+          <td>{{imp_data.amount}}</td>
+          <td>{{imp_data.price}}</td>
+          <td>{{imp_data.total}}</td>
+          <td><button class="btn btn-sm btn-primary" 
+            (click)="openReportModal(imp_data)"><mat-icon>more_horiz</mat-icon></button>
+          </td>
+      </tr>      
+    </tbody>
+</table>
+
+</div>

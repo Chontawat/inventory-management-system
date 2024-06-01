@@ -1,0 +1,24 @@
+.list
+{
+background-color:#ffffff;
+height:1080px;
+width:1656px;
+filter:drop-shadow(0px 2px 4px rgba(0,0,0,0.05999999865889549));
+align-self:flex-start;
+left:264px;
+top:0px;
+position:absolute;
+border-radius:16px 16px 0px 0px;
+padding:0px;
+display:flex;
+flex-direction:column;
+}
+
+.container {
+    display: center;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;  /*This ensures the container takes up the full viewport height */
+  }
+
+  

@@ -1,0 +1,121 @@
+<!-- <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="container-fluid">
+    <ul class="navbar-nav">   
+        <a class="navbar-brand" href="/">เว็บบริหารจัดการคลังสินค้าร้านเจ๊คิดกะทิสด</a>
+     <li class="nav-item">
+        <a class="btn btn-success nav-link active" href="/management">ข้อมูลสินค้า</a>
+      </li> &nbsp;&nbsp;
+      <li class="nav-item">
+        <a class="btn btn-primary nav-link active" href="/Pdealer">ข้อมูลผู้จัดจำหน่าย</a>
+      </li> &nbsp;&nbsp;
+      <li class="nav-item">
+        <a class="btn btn-warning nav-link active text-body" href="/employee">ข้อมูลพนักงาน</a>
+      </li> &nbsp;&nbsp;
+      <li class="nav-item">
+        <a class="btn btn-info nav-link active text-body" href="/import_product">สั่งซื้อสินค้า</a>
+      </li> &nbsp;&nbsp;
+      <li class="nav-item">
+        <a class="btn btn-danger nav-link active" href="/PickingSystem">เบิกสินค้า</a>
+      </li> &nbsp;&nbsp;
+      <li class="nav-item">
+        <a class="btn btn-secondary nav-link active" href="/shipping">สินค้ารอการจัดส่ง</a>
+      </li>
+    </ul>
+  </div>
+</nav> -->
+
+
+
+<p>
+  <mat-toolbar color="primary" class="mat-elevation-z8">
+    <button mat-icon-button (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>เว็บบริหารจัดการคลังสินค้า ร้านเจ๊คิดกะทิสด</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+</p>
+
+<mat-drawer-container autosize>
+  <mat-drawer #drawer opened="true" mode="over">
+    <mat-nav-list>
+      <mat-list-item>
+        <button mat-button><a routerLink="/">Home</a></button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button><a routerLink="/management">ข้อมูลสินค้า</a></button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button><a routerLink="/Pdealer">ข้อมูลผู้จัดจำหน่าย</a></button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button><a routerLink="/employee">ข้อมูลพนักงาน</a></button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button><a routerLink="/import_product">สั่งซื้อสินค้า</a></button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button><a routerLink="/PickingSystem">เบิกสินค้า</a></button>
+      </mat-list-item>
+      <mat-list-item>
+        <button mat-button><a routerLink="/shipping">สินค้ารอการจัดส่ง</a></button>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-drawer>
+
+
+  <mat-drawer-content>
+    <div style="text-align: center; min-height: 600px;">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+
+
+
+
+
+<!-- <mat-sidenav-container>
+  <mat-sidenav mode="side" [(opened)]="opened">
+    <li class="nav-item">
+      <a class="btn btn-success nav-link active" href="/">หน้าหลัก</a>
+    </li>
+    &nbsp;&nbsp;
+    <li class="nav-item">
+      <a class="btn btn-success nav-link active" href="/management">ข้อมูลสินค้า</a>
+    </li>
+    &nbsp;&nbsp;
+    <li class="nav-item">
+      <a class="btn btn-primary nav-link active" href="/Pdealer">ข้อมูลผู้จัดจำหน่าย</a>
+    </li>
+    &nbsp;&nbsp;
+    <li class="nav-item">
+      <a class="btn btn-warning nav-link active text-body" href="/employee">ข้อมูลพนักงาน</a>
+    </li>
+    &nbsp;&nbsp;
+    <li class="nav-item">
+      <a class="btn btn-info nav-link active text-body" href="/import_product">สั่งซื้อสินค้า</a>
+    </li>
+    &nbsp;&nbsp;
+    <li class="nav-item">
+      <a class="btn btn-danger nav-link active" href="/PickingSystem">เบิกสินค้า</a>
+    </li>
+    &nbsp;&nbsp;
+    <li class="nav-item">
+      <a class="btn btn-secondary nav-link active" href="/shipping">สินค้ารอการจัดส่ง</a>
+    </li>
+  </mat-sidenav> 
+
+<mat-sidenav-content>
+  <router-outlet></router-outlet>
+</mat-sidenav-content>
+
+</mat-sidenav-container> -->
+
+<!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>share</mat-icon>
+    </button> -->

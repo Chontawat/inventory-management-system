@@ -1,0 +1,43 @@
+<div class="container">
+  <h1>ข้อมูลสินค้า</h1>
+
+  <div>
+    <input class="form-control" type="text" name="searchResults" placeholder="ค้นหาข้อมูลสินค้า"
+      [(ngModel)]="searchText">&nbsp;
+    <button (click)="openDialog()" class="btn btn-success">เพิ่มข้อมูล</button>&nbsp;
+    <button (click)="generatePDF()" class="btn btn-warning">ดาวน์โหลดข้อมูลสินค้าทั้งหมด</button>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">รหัสสินค้า</th>
+        <th scope="col">ชื่อสินค้า</th>
+        <th scope="col">ประเภทสินค้า</th>
+        <th scope="col">ตัวแทนจัดจำหน่าย</th>
+        <th scope="col">ราคา</th>
+        <th scope="col">หน่วยนับ</th>
+        <th scope="col">ลบข้อมูล</th>
+        <th scope="col">แก้ไขข้อมูล</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rec of readproductData | search: searchText">
+        <th scope="row">{{rec.product_id}}</th>
+        <td>{{rec.product_name}}</td>
+        <td>{{rec.Tproduct_name}}</td>
+        <td>{{rec.dealer_name}}</td>
+        <td>{{rec.price}}</td>
+        <td>{{rec.c_unit}}</td>
+        <td>
+          <button class="btn btn-sm btn-danger" (click)="deleteProductID(rec.product_id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+        <td><a [routerLink]="['/CreateProduct',rec.product_id]"class="btn btn-sm btn-success">
+          
+          <mat-icon>edit</mat-icon></a>
+      </tr>
+    </tbody>
+
+  </table>
+</div>

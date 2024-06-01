@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="container">
+    <form [formGroup]="DealerForm" (ngSubmit)="Dealer_Submit()">
+        <div class="col-lg-4 mt-2">รหัสตัวแทนจัดจำหน่าย:
+            <input type="text" class="form-control" formControlName="dealer_id">
+        </div>
+        <div class="col-lg-4 mt-2">ชื่อตัวแทนจัดจำหน่าย :
+            <input type="text" class="form-control" formControlName="dealer_name">
+        </div>
+        <div class="col-lg-4 mt-2">ที่อยู่ :
+            <input type="text" class="form-control" formControlName="address">
+        </div>
+        <div class="col-lg-4 mt-2">เบอร์โทร :
+            <input type="text" class="form-control" formControlName="tel">
+        </div>
+        
+        <div class="col-lg-4 mt-2" *ngIf="!get_dealer_data_id" (click)="Dealer_Submit()">
+            <button class="btn btn-dark" btn-sm>เพิ่มข้อมูลใหม่</button>
+        </div> &nbsp;&nbsp;
+        <div class="col-lg-4 mt-2" *ngIf="get_dealer_data_id" (click)="updateDealerData()">
+            <button class="btn btn-dark" btn-sm>อัพเดตข้อมูล</button>
+        </div> &nbsp;&nbsp;
+
+    </form>
+</div>
+</div>
+

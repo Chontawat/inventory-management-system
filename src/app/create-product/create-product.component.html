@@ -1,0 +1,31 @@
+<div class="container">
+    <form [formGroup]="productForm" (ngSubmit)="productSubmit()">
+        <div class="col-lg-4 mt-2">หมายเลขสินค้า :
+            <input type="text" class="form-control" formControlName="product_id">
+        </div>
+        <div class="col-lg-4 mt-2">ชื่อสินค้า :
+            <input type="text" class="form-control" formControlName="product_name">
+        </div>
+        <div class="col-lg-4 mt-2">ประเภทสินค้า :
+            <input type="text" class="form-control" formControlName="Tproduct_id">
+        </div>
+        <div class="col-lg-4 mt-2">ตัวแทนจัดจำหน่าย :
+            <input type="text" class="form-control" formControlName="dealer_id">
+        </div>
+        <div class="col-lg-4 mt-2">ราคา : 
+            <input type="text" class="form-control" formControlName="price">
+        </div>
+        <div class="col-lg-4 mt-2">หน่วยนับ :
+            <input type="text" class="form-control" formControlName="c_unit">
+        </div>
+        <div class="col-lg-4 mt-2" *ngIf="!getProduct_id" (click)="productSubmit()">
+            <button class="btn btn-dark" type="submit" btn-sm>ทำการเพิ่มข้อมูลใหม่</button>
+        </div> &nbsp;&nbsp;
+        <div class="col-lg-4 mt-2" *ngIf="getProduct_id" (click)="productUpdate()">
+            <button class="btn btn-dark" type="button" btn-sm>อัพเดตข้อมูล</button>
+        </div> &nbsp;&nbsp;
+       
+    
+    </form>
+    </div>
+    

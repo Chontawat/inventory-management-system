@@ -1,0 +1,148 @@
+
+<div id="list" class="list">
+<h1>เบิกสินค้า</h1>
+<form [formGroup]="picking_product_Form" (ngSubmit)="Submit_picking_product_Data()">
+    <label>รหัสเบิกสินค้า:</label><br>
+    <input type="text" class="form-control" formControlName="picking_id"><br>
+
+    <label>รหัสล็อตสินค้า:</label><br>
+    <input type="text" class="form-control" formControlName="lot_id"><br>
+
+    <label>รหัสสินค้า:</label><br>
+    <input type="text" class="form-control" formControlName="product_id"><br>
+
+    <label for="dropdown">สินค้าที่ต้องการเบิก:</label><br>
+    <select id=".dropdown" class="dropdown" formControlName="product_id">
+      <option value="" disabled selected>กรุณาเลือกสินค้าที่ต้องการ</option>
+      <option *ngFor="let item of readproductData" [value]="item.product_id">{{ item.product_name }}</option>
+    </select><br>
+
+    <label for="dropdown">พนักงานที่เบิก:</label><br>
+    <select id="dropdown" class="dropdown" formControlName="employee_id">
+      <option value="" disabled selected>ระบุผู้ทำการเบิกสินค้า</option>
+          <option *ngFor="let item of empData" [value]="item.employee_id">{{ item.employee_name }}</option>
+    </select><br>
+
+    <label>วันที่เบิก:</label><br>
+    <input type="date" class="form-control" formControlName="date_of_picking"><br>
+
+    
+    <label>จำนวนที่เบิก:</label><br>
+    <input type="number" class="form-control" id="value1"  [(ngModel)]="value1" (input)="calculate()" formControlName="amount_of_picking"><br>
+    
+    <label>ราคา:</label><br>
+    <input type="text" class="form-control" id="value2" [(ngModel)]="value2" (input)="calculate()" formControlName="price"><br>
+
+    <label>ราคาสุทธิ:</label><br>
+    <input type="text" class="form-control" id="result" [(ngModel)]="result" formControlName="total"><br>
+    <br>
+
+    <button type="submit" class="btn btn-primary">ทำการเบิกสินค้า</button>&nbsp;
+    
+    <button type="submit" class="btn btn-warning">ยกเลิก</button>
+  </form>
+  <br><br><br>
+
+<h1>ข้อมูลสินค้าคงเหลือ</h1>
+<table class="table float-left">  
+    <thead>
+      <tr>
+        <th scope="col">รหัสสินค้า</th>
+        <th scope="col">ชื่อสินค้า</th>
+        <th scope="col">ประเภทสินค้า</th>
+        <th scope="col">ตัวแทนจัดจำหน่าย</th>
+        <th scope="col">ราคา</th>
+        <th scope="col">หน่วยนับ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <tr *ngFor="let rec of readproductData">
+          <th scope="row">{{rec.product_id}}</th>
+          <td>{{rec.product_name}}</td>
+          <td>{{rec.Tproduct_name}}</td>
+          <td>{{rec.dealer_name}}</td>
+          <td>{{rec.price}}</td>
+          <td>{{rec.c_unit}}</td>
+      </tr>      
+    </tbody>
+</table>
+<br>
+<h1>อัพเดตคลังสินค้า</h1>
+<div>
+  <form [formGroup]="inventoryForm" (ngSubmit)="updateInventory()">
+    <label>รหัสล็อตสินค้า:</label><br>
+    <input type="text" class="form-control" formControlName="lot_id"><br>
+    <label>จำนวนที่เบิก:</label><br>
+    <input type="number" class="form-control" formControlName="product_remain"><br>
+    <button mat-raised-button color="primary" type="submit">อัพเดตคลังสินค้า</button>
+  </form>
+  
+  <div *ngIf="remainingStock !== undefined">
+    <p>Remaining Stock: {{ remainingStock }}</p>
+  </div>
+</div>
+
+<h1>สินค้าคงเหลือในคลังสินค้า</h1>
+<table class="table float-left">
+  <thead>
+    <tr>
+      <th scope="col">รหัสคลังสินค้า</th>
+      <th scope="col">ชื่อสินค้า</th>
+      <th scope="col">วันที่ผลิต</th>
+      <th scope="col">วันที่หมดอายุ</th>
+      <th scope="col">วันที่ได้รับ</th>
+      <th scope="col">จำนวนทั้งหมด</th>
+      <th scope="col">คงเหลือ</th>
+      <th scope="col">ราคา/หน่วย</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <tr *ngFor="let p_lot of pro_lot_data">
+        <th scope="row">{{p_lot.lot_id}}</th>
+        <td>{{p_lot.product_name}}</td>
+        <td>{{p_lot.production_date | date :'d/MMM/yyyy'}}</td>
+        <td>{{p_lot.expiration_date | date :'d/MMM/yyyy'}}</td>
+        <td>{{p_lot.taken_date | date :'d/MMM/yyyy'}}</td>
+        <td>{{p_lot.product_total}}</td>
+        <td>{{p_lot.product_remain}}</td>
+        <td>{{p_lot.price_total}}</td>
+    </tr>      
+  </tbody>
+</table>
+
+<h1>สินค้าที่ต้องการเบิก</h1>
+<table class="table float-left">
+    <thead>
+      <tr>
+        <th scope="col">รหัสเบิกสินค้า</th>
+        <th scope="col">รหัสล็อตสินค้า</th>
+        <th scope="col">รหัสสินค้า</th>
+        <th scope="col">ชื่อสินค้า</th>
+        <th scope="col">พนักงานที่เบิก</th>
+        <th scope="col">วันที่เบิก</th>
+        <th scope="col">จำนวนที่เบิก</th>
+        <th scope="col">ราคา/หน่วย</th>
+        <th scope="col">ราคาทั้งหมด</th>
+    </thead>
+    <tbody>
+      <tr>
+        <tr *ngFor="let pick of readAllPickingProduct">
+          <th scope="row">{{pick.picking_id}}</th>
+          <td>{{pick.lot_id}}</td>
+          <td>{{pick.product_id}}</td>
+          <td>{{pick.product_name}}</td>
+          <td>{{pick.employee_name}}</td>
+          <td>{{pick.date_of_picking | date :'d/MMM/yyyy'}}</td>
+          <td>{{pick.amount_of_picking}}</td>
+          <td>{{pick.price}}</td>
+          <td>{{pick.total}}</td>
+      </tr>      
+    </tbody>
+    <!-- <button (click)="onSubmit(pick.picking_id)">Withdraw</button> -->
+</table>
+<a><button (click)="generate_Picking_data_PDF()" class="btn btn-warning">ดาวน์โหลดข้อมูลการเบิกสินค้าทั้งหมด</button></a>
+
+</div>

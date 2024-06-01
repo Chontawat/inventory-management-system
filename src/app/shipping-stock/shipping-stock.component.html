@@ -1,0 +1,68 @@
+<div class="list" id="list">
+<h1>สินค้าที่สั่งซื้อ</h1>
+<table class="table float-right" >
+    <thead>
+      <tr>
+        <th scope="col">รหัสการสั่งซื้อ</th>
+        <th scope="col">รหัสสินค้า</th>
+        <th scope="col">ชื่อสินค้า</th>
+        <th scope="col">ประเภทสินค้า</th>
+        <th scope="col">ชื่อพนักงาน</th>
+        <th scope="col">ชื่อตัวแทนจัดจำหน่าย</th>
+        <th scope="col">วันสั่งซื้อ</th>
+        <th scope="col">วันส่งสินค้า</th>
+        <th scope="col">จำนวน</th>
+        <th scope="col">ราคา</th>
+        <th scope="col">ราคาทั้งหมด</th>
+        <!-- <th scope="col">สถานะ</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <tr *ngFor="let imp_data of read_import_product_Data">
+          <th scope="row">{{imp_data.import_id}}</th>
+          <td>{{imp_data.product_id}}</td>
+          <td>{{imp_data.product_name}}</td>
+          <td>{{imp_data.Tproduct_name}}</td>
+          <td>{{imp_data.employee_name}}</td>
+          <td>{{imp_data.dealer_name}}</td>
+          <td>{{imp_data.date_of_import | date :'d/MMM/yyyy'}}</td>
+          <td>{{imp_data.date_of_transport | date :'d/MMM/yyyy'}}</td>
+          <td>{{imp_data.amount}}</td>
+          <td>{{imp_data.price}}</td>
+          <td>{{imp_data.total}}</td>
+          <!-- <td>{{imp_data.status}}</td> -->
+      </tr>      
+     
+    </tbody>
+</table> 
+
+<a><button (click)="generate_Import_data_PDF()" class="btn btn-warning">ดาวน์โหลดข้อมูลการสั่งซื้อทั้งหมด</button></a>
+<br><br>
+<h2>สินค้าที่ต้องการเข้าสต็อก</h2>
+<div>
+  <form>
+    <label for="fname">First Name</label>
+    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+    <label for="lname">Last Name</label>
+    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+    <label for="country">Country</label>
+    <select id="country" name="country">  
+      <!-- <option *ngFor="let product of products" [value]="product">{{ product }}</option> -->
+    </select>
+  
+    <input type="submit" value="Submit">
+  </form>
+</div>
+</div> 
+
+
+
+
+
+
+
+
+
