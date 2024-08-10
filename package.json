@@ -1,11 +1,11 @@
 {
   "name": "projdesign1",
   "version": "0.0.0",
-  
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "db": "nodemon -r dotenv/config lib/database.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
